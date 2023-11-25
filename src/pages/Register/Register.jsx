@@ -3,14 +3,15 @@ import { GrLogin } from "react-icons/gr";
 import { MdEmail } from "react-icons/md";
 import { RiLockPasswordFill } from "react-icons/ri";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FaHouse } from "react-icons/fa6";
 import { Helmet } from "react-helmet-async";
 import { IoPersonSharp } from "react-icons/io5";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import axios from "axios";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
+import { AuthContext } from "../../providers/AuthProvider";
 
 const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
 const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
@@ -18,6 +19,8 @@ const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_ke
 const Register = () => {
   const [seePassword, setSeePassword] = useState(false);
   const { register, handleSubmit, reset } = useForm();
+  const navigate = useNavigate();
+  const { addUsernamePhoto, createUser, logOut } = useContext(AuthContext);
 
   const onSubmit = async (data) => {
     // VALIDATIONS
@@ -59,11 +62,26 @@ const Register = () => {
     });
     if (res.data.success) {
       data["image"] = res.data.data.display_url;
-      delete data.password;
-      delete data.confirm_password;
       const user_info = { role: "donor", ...data };
-      console.log("working properly. do firebase here and mongo here");
-      console.log(user_info);
+
+      createUser(user_info.email, user_info.password)
+        .then(() => {
+          addUsernamePhoto(data.name, data.image).then(() => {
+            console.log("Username and image updated to firebase");
+            toast.success("Successfully registered. Redirecting...");
+            logOut().then(() => {
+              console.log("LOGGED OUT");
+              setTimeout(() => {
+                navigate("/login");
+              }, 2000);
+            });
+
+            // PUT INTO MONGO DB
+          });
+        })
+        .catch((error) => {
+          toast.error(error);
+        });
     }
   };
 

@@ -3,16 +3,32 @@ import { GrLogin } from "react-icons/gr";
 import { MdEmail } from "react-icons/md";
 import { RiLockPasswordFill } from "react-icons/ri";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { FaHouse } from "react-icons/fa6";
 import { Helmet } from "react-helmet-async";
+import { AuthContext } from "../../providers/AuthProvider";
+import { toast } from "sonner";
 
 const Login = () => {
   const [seePassword, setSeePassword] = useState(false);
+  const { signIn } = useContext(AuthContext);
 
   const handleLogin = (e) => {
     e.preventDefault();
+    const form = e.target;
+    const email = form.email.value;
+    const password = form.password.value;
+
+    signIn(email, password)
+      .then((result) => {
+        const user = result.user;
+        console.log(user);
+        toast.success("Successfully logged in. Redirecting...");
+      })
+      .catch((error) => {
+        toast.error(error.message);
+      });
   };
 
   return (
