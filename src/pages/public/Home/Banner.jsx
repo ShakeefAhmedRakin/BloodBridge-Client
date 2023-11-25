@@ -18,11 +18,13 @@ const Banner = () => {
             toward a healthier, brighter future.
           </p>
           <div className="flex flex-col md:flex-row gap-x-4 gap-y-2">
-            <button className="btn bg-accent hover:bg-accent hover:shadow-xl">
-              Search Donors <GrSearch className="text-lg"></GrSearch>
-            </button>
+            <Link to={"/search-donor"}>
+              <button className="btn w-full bg-accent hover:bg-accent hover:shadow-xl">
+                Search Donors <GrSearch className="text-lg"></GrSearch>
+              </button>
+            </Link>
             <Link to={"/register"}>
-              <button className="btn bg-primary hover:bg-primary text-white hover:shadow-xl">
+              <button className="btn w-full bg-primary hover:bg-primary text-white hover:shadow-xl">
                 Donate Today
                 <MdOutlineBloodtype className="text-2xl"></MdOutlineBloodtype>
               </button>
