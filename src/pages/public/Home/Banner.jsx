@@ -1,5 +1,6 @@
 import { GrSearch } from "react-icons/gr";
 import { MdOutlineBloodtype } from "react-icons/md";
+import { Link } from "react-router-dom";
 
 const Banner = () => {
   return (
@@ -20,10 +21,12 @@ const Banner = () => {
             <button className="btn bg-accent hover:bg-accent hover:shadow-xl">
               Search Donors <GrSearch className="text-lg"></GrSearch>
             </button>
-            <button className="btn bg-primary hover:bg-primary text-white hover:shadow-xl">
-              Donate Today
-              <MdOutlineBloodtype className="text-2xl"></MdOutlineBloodtype>
-            </button>
+            <Link to={"/register"}>
+              <button className="btn bg-primary hover:bg-primary text-white hover:shadow-xl">
+                Donate Today
+                <MdOutlineBloodtype className="text-2xl"></MdOutlineBloodtype>
+              </button>
+            </Link>
           </div>
         </div>
 
