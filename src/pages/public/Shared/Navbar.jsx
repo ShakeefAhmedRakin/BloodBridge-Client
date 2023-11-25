@@ -1,5 +1,5 @@
 import { BiDonateBlood } from "react-icons/bi";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { GrLogin } from "react-icons/gr";
 import "./Navbar.css";
 
@@ -73,10 +73,12 @@ const Navbar = () => {
           </ul>
         </div>
         <div className="navbar-end">
-          <button className="btn bg-secondary hover:shadow-xl hover:bg-secondary font-semibold text-white">
-            <span className="hidden lg:flex">Log In</span>
-            <GrLogin className="text-xl"></GrLogin>
-          </button>
+          <Link to={"/login"}>
+            <button className="btn bg-secondary hover:shadow-xl hover:bg-secondary font-semibold text-white">
+              <span className="hidden lg:flex">Log In</span>
+              <GrLogin className="text-xl"></GrLogin>
+            </button>
+          </Link>
         </div>
       </div>
     </>
