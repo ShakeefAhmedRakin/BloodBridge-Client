@@ -12,6 +12,7 @@ import axios from "axios";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { AuthContext } from "../../providers/AuthProvider";
+import useAxiosPublic from "../../hooks/useAxiosPublic";
 
 const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
 const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
@@ -21,6 +22,7 @@ const Register = () => {
   const { register, handleSubmit, reset } = useForm();
   const navigate = useNavigate();
   const { addUsernamePhoto, createUser, logOut } = useContext(AuthContext);
+  const AxiosPublic = useAxiosPublic();
 
   const onSubmit = async (data) => {
     // VALIDATIONS
@@ -60,6 +62,7 @@ const Register = () => {
         "content-type": "multipart/form-data",
       },
     });
+
     if (res.data.success) {
       data["image"] = res.data.data.display_url;
       const user_info = { role: "donor", status: "active", ...data };
@@ -67,20 +70,24 @@ const Register = () => {
       createUser(user_info.email, user_info.password)
         .then(() => {
           addUsernamePhoto(data.name, data.image).then(() => {
-            console.log("Username and image updated to firebase");
-            toast.success("Successfully registered. Redirecting...");
-            logOut().then(() => {
-              console.log("LOGGED OUT");
-              setTimeout(() => {
-                navigate("/login");
-              }, 2000);
-            });
+            delete user_info.password;
+            delete user_info.confirm_password;
 
-            // PUT INTO MONGO DB
+            AxiosPublic.post("/users", user_info).then((res) => {
+              if (res.data.insertedId) {
+                toast.success("Successfully registered. Redirecting...");
+                reset();
+                logOut().then(() => {
+                  setTimeout(() => {
+                    navigate("/login");
+                  }, 2000);
+                });
+              }
+            });
           });
         })
         .catch((error) => {
-          toast.error(error);
+          toast.error(error.message);
         });
     }
   };

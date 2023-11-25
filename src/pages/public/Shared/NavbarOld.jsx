@@ -1,10 +1,10 @@
 import { BiDonateBlood } from "react-icons/bi";
 import { Link, NavLink } from "react-router-dom";
+import { GrLogin, GrLogout } from "react-icons/gr";
 import "./Navbar.css";
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../../providers/AuthProvider";
 import { toast } from "sonner";
-import { GrLogin, GrLogout } from "react-icons/gr";
 
 const Navbar = () => {
   const { user, logOut } = useContext(AuthContext);
@@ -52,7 +52,7 @@ const Navbar = () => {
 
   return (
     <>
-      <div className="navbar bg-base-100">
+      <div className="navbar">
         <div className="navbar-start">
           <div className="dropdown">
             <label tabIndex={0} className="btn btn-ghost lg:hidden">
@@ -73,7 +73,7 @@ const Navbar = () => {
             </label>
             <ul
               tabIndex={0}
-              className="font-heading font-semibold text-secondary space-y-2 dropdown-content bg-base-100 mt-1 border-white border-b-[1px] z-50 p-4 shadow-xl bg-primaryLight dark:bg-primaryDark rounded-box w-64 block lg:hidden"
+              className="font-heading font-semibold text-secondary space-y-2 dropdown-content bg-base-100 mt-1 border-white border-b-[1px] -ml-4 z-50 p-4 shadow bg-primaryLight dark:bg-primaryDark rounded-none w-screen"
             >
               {links}
             </ul>
@@ -86,7 +86,7 @@ const Navbar = () => {
           </div>
         </div>
         <div className="navbar-center hidden lg:flex">
-          <ul className="hidden md:flex font-heading font-semibold text-secondary">
+          <ul className="hidden lg:flex font-heading font-semibold text-secondary">
             {links}
           </ul>
         </div>
@@ -138,14 +138,12 @@ const Navbar = () => {
               </div>
             </>
           ) : (
-            <>
-              <Link to={"/login"}>
-                <button className="btn btn-sm md:btn-md bg-secondary hover:shadow-xl hover:bg-secondary font-semibold text-white">
-                  <span className="hidden lg:flex">Log In</span>
-                  <GrLogin className="text-xl"></GrLogin>
-                </button>
-              </Link>
-            </>
+            <Link to={"/login"}>
+              <button className="btn btn-sm md:btn-md bg-secondary hover:shadow-xl hover:bg-secondary font-semibold text-white">
+                <span className="hidden lg:flex">Log In</span>
+                <GrLogin className="text-xl"></GrLogin>
+              </button>
+            </Link>
           )}
         </div>
       </div>
