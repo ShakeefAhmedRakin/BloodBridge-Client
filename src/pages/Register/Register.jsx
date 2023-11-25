@@ -62,7 +62,7 @@ const Register = () => {
     });
     if (res.data.success) {
       data["image"] = res.data.data.display_url;
-      const user_info = { role: "donor", ...data };
+      const user_info = { role: "donor", status: "active", ...data };
 
       createUser(user_info.email, user_info.password)
         .then(() => {
