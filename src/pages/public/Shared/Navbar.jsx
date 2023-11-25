@@ -114,7 +114,7 @@ const Navbar = () => {
                       {currentUser?.displayName}
                     </h1>
                     <hr className="mb-3" />
-                    <Link to={"/donor-dashboard"} className="mb-1">
+                    <Link to={"/dashboard/"} className="mb-1">
                       <li className="font-heading font-semibold text-secondary text-base hover:underline hover:text-primary">
                         Dashboard
                       </li>
