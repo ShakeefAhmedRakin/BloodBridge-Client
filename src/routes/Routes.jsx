@@ -3,9 +3,10 @@ import Root from "../pages//public/Root";
 import Home from "../pages/public/Home/Home";
 import Login from "../pages/Login/Login";
 import Register from "../pages/Register/Register";
-import Dashboard from "../pages/Admin/Dashboard";
-import AdminHome from "../pages/Admin/AdminHome";
-import AllUsers from "../pages/Admin/AllUsers";
+import Dashboard from "../pages/Dashboard/Dashboard";
+import DashboardHome from "../pages/Dashboard/DashboardHome";
+import AllUsers from "../pages/Dashboard/Admin/AllUsers/AllUsers";
+import PrivateRoute from "../routes/PrivateRoute";
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -27,24 +28,28 @@ export const router = createBrowserRouter([
     element: <Register></Register>,
   },
   {
-    path: "dashboard",
-    element: <Dashboard></Dashboard>,
+    path: "/dashboard",
+    element: (
+      <PrivateRoute>
+        <Dashboard></Dashboard>
+      </PrivateRoute>
+    ),
     children: [
       // ADMIN ROUTES
       {
-        path: "admin-home",
-        element: <AdminHome></AdminHome>,
+        path: "/dashboard",
+        element: <DashboardHome></DashboardHome>,
       },
       {
-        path: "user",
+        path: "/dashboard/user",
         element: <AllUsers></AllUsers>,
       },
       {
-        path: "all-blood-donations",
+        path: "/dashboard/all-blood-donations",
         element: <></>,
       },
       {
-        path: "content-manage",
+        path: "/dashboard/content-manage",
         element: <></>,
       },
     ],
