@@ -84,6 +84,8 @@ const AllUsers = () => {
                     if (res.data.modifiedCount) {
                       refetch();
                       toast.success("User has been blocked");
+                    } else {
+                      toast.error("User is already blocked");
                     }
                   });
                   onClose();
@@ -129,7 +131,9 @@ const AllUsers = () => {
                     .then((res) => {
                       if (res.data.modifiedCount) {
                         refetch();
-                        toast.success("User has been blocked");
+                        toast.success("User has been unblocked");
+                      } else {
+                        toast.error("User is already unblocked");
                       }
                     });
                   onClose();
@@ -143,6 +147,75 @@ const AllUsers = () => {
       },
     });
   };
+
+  const handleMakeAdmin = (user) => {
+    confirmAlert({
+      closeOnEscape: true,
+      closeOnClickOutside: true,
+      keyCodeForClose: [8, 32],
+      customUI: ({ onClose }) => {
+        return (
+          <div className="custom-ui bg-background shadow-xl p-5 rounded-xl font-heading">
+            <h1 className="text-xl text-center font-bold text-secondary">
+              Make Admin
+            </h1>
+            <hr />
+            <p className="text-gray-700 text-center mt-8">
+              Are you sure you want to make this user an admin?
+            </p>
+            <p className="font-bold mt-4 mb-8 text-center">Name: {user.name}</p>
+            <div className="grid grid-cols-2 gap-4">
+              <button
+                onClick={onClose}
+                className="btn text-white bg-secondary hover:bg-secondary"
+              >
+                No
+              </button>
+              <button
+                className="btn text-white bg-primary hover:bg-primary"
+                onClick={() => {
+                  axiosSecure.patch(`/users/admin/${user._id}`).then((res) => {
+                    if (res.data.modifiedCount) {
+                      refetch();
+                      toast.success("User has been made an admin");
+                    } else {
+                      toast.error("User is already an admin");
+                    }
+                  });
+                  onClose();
+                }}
+              >
+                Yes
+              </button>
+            </div>
+          </div>
+        );
+      },
+    });
+  };
+
+  const handleMakeVolunteer = (user) => {
+    axiosSecure.patch(`/users/volunteer/${user._id}`).then((res) => {
+      if (res.data.modifiedCount) {
+        refetch();
+        toast.success("User has been made a volunteer");
+      } else {
+        toast.error("User is already a volunteer");
+      }
+    });
+  };
+
+  const handleMakeDonor = (user) => {
+    axiosSecure.patch(`/users/donor/${user._id}`).then((res) => {
+      if (res.data.modifiedCount) {
+        refetch();
+        toast.success("User has been made a donor");
+      } else {
+        toast.error("User is already a donor");
+      }
+    });
+  };
+
   return (
     <>
       <DashboardTitle title={"All Users"}></DashboardTitle>
@@ -192,12 +265,22 @@ const AllUsers = () => {
                       </TableCell>
                       <TableCell>{user.email}</TableCell>
                       <TableCell>{user.name}</TableCell>
-                      <TableCell>{user.status}</TableCell>
+                      <TableCell>
+                        <span
+                          className={`font-semibold ${
+                            user.status === "active"
+                              ? "text-green-600"
+                              : "text-red-600"
+                          }`}
+                        >
+                          {user.status}
+                        </span>
+                      </TableCell>
                       <TableCell>
                         <span
                           className={`font-semibold ${
                             user.role === "donor"
-                              ? "text-red-600"
+                              ? "text-purple-600"
                               : user.role === "volunteer"
                               ? "text-green-600"
                               : ""
@@ -228,15 +311,30 @@ const AllUsers = () => {
                             Unblock
                           </button>
                         )}
-                        <button
-                          className="btn bg-green-700 hover:bg-green-700 text-white"
-                          type="button"
-                        >
-                          Make Volunteer
-                        </button>
+                        {user.role === "donor" ? (
+                          <button
+                            className="btn bg-green-700 hover:bg-green-700 text-white"
+                            type="button"
+                            onClick={() => handleMakeVolunteer(user)}
+                          >
+                            Make Volunteer
+                          </button>
+                        ) : (
+                          <button
+                            className="btn bg-purple-700 hover:bg-purple-700 text-white"
+                            type="button"
+                            onClick={() => handleMakeDonor(user)}
+                          >
+                            Make Donor
+                          </button>
+                        )}
                         <button
                           className="btn bg-secondary hover:bg-secondary text-white"
                           type="button"
+                          disabled={user.role === "admin" ? "disabled" : ""}
+                          onClick={() => {
+                            handleMakeAdmin(user);
+                          }}
                         >
                           Make Admin
                         </button>
