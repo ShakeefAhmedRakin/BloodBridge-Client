@@ -7,6 +7,7 @@ import Dashboard from "../pages/Dashboard/Dashboard";
 import DashboardHome from "../pages/Dashboard/DashboardHome";
 import AllUsers from "../pages/Dashboard/Admin/AllUsers/AllUsers";
 import PrivateRoute from "../routes/PrivateRoute";
+import AdminRoute from "./AdminRoute";
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -41,8 +42,12 @@ export const router = createBrowserRouter([
         element: <DashboardHome></DashboardHome>,
       },
       {
-        path: "/dashboard/user",
-        element: <AllUsers></AllUsers>,
+        path: "/dashboard/all-users",
+        element: (
+          <AdminRoute>
+            <AllUsers></AllUsers>
+          </AdminRoute>
+        ),
       },
       {
         path: "/dashboard/all-blood-donations",
