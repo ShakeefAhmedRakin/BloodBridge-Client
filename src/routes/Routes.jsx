@@ -8,6 +8,7 @@ import DashboardHome from "../pages/Dashboard/DashboardHome";
 import AllUsers from "../pages/Dashboard/Admin/AllUsers/AllUsers";
 import PrivateRoute from "../routes/PrivateRoute";
 import AdminRoute from "./AdminRoute";
+import Profile from "../pages/Dashboard/Shared/Profile";
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -36,6 +37,15 @@ export const router = createBrowserRouter([
       </PrivateRoute>
     ),
     children: [
+      // SHARED ROUTES
+      {
+        path: "/dashboard/profile",
+        element: (
+          <PrivateRoute>
+            <Profile></Profile>
+          </PrivateRoute>
+        ),
+      },
       // ADMIN ROUTES
       {
         path: "/dashboard",

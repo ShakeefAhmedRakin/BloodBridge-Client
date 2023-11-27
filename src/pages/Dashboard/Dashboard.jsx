@@ -2,17 +2,19 @@ import { BiDonateBlood } from "react-icons/bi";
 import { Link, NavLink, Outlet } from "react-router-dom";
 import { TbLayoutSidebarLeftCollapseFilled } from "react-icons/tb";
 import { TbLayoutSidebarLeftExpandFilled } from "react-icons/tb";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { AuthContext } from "../../providers/AuthProvider";
 import { toast } from "sonner";
 import { GrLogout } from "react-icons/gr";
 import "./Dashboard.css";
-import useAxiosSecure from "../../hooks/useAxiosSecure";
+
+import useUserInfo from "../../hooks/useUserInfo";
 
 const Dashboard = () => {
-  const { user, logOut } = useContext(AuthContext);
-  const [role, setRole] = useState("donor");
-  const axiosSecure = useAxiosSecure();
+  const { logOut } = useContext(AuthContext);
+  const [userInfo] = useUserInfo();
+  const role = userInfo.role;
+
   const closeSidebar = () => {
     const closeBtn = document.getElementById("my-drawer-2");
     if (closeBtn) {
@@ -27,12 +29,6 @@ const Dashboard = () => {
       })
       .catch((error) => console.log(error));
   };
-
-  // CHECKING ROLE OF USER SECURELY
-
-  axiosSecure.get(`/users/data/${user?.email}`).then((res) => {
-    setRole(res.data.role);
-  });
 
   return (
     <>
@@ -82,6 +78,13 @@ const Dashboard = () => {
                 className={"p-2 w-full border-2 hover:underline rounded-xl"}
               >
                 <li>Dashboard</li>
+              </NavLink>
+              <NavLink
+                to={"/dashboard/profile"}
+                onClick={closeSidebar}
+                className={"p-2 w-full border-2 hover:underline rounded-xl"}
+              >
+                <li>Your Profile</li>
               </NavLink>
               {/* ADMIN ROUTES */}
               {role === "admin" ? (

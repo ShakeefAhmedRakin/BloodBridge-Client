@@ -1,10 +1,10 @@
 import { BiDonateBlood } from "react-icons/bi";
 import { Link, NavLink } from "react-router-dom";
-import "./Navbar.css";
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../../providers/AuthProvider";
 import { toast } from "sonner";
 import { GrLogin, GrLogout } from "react-icons/gr";
+import "./Navbar.css";
 
 const Navbar = () => {
   const { user, logOut } = useContext(AuthContext);

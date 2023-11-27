@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import DashboardTitle from "../../../../components/DashboardTitle";
 import useAxiosSecure from "../../../../hooks/useAxiosSecure";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 // MATERIAL UI
 import {
   Card,
@@ -19,9 +19,11 @@ import {
 import { toast } from "sonner";
 import { confirmAlert } from "react-confirm-alert"; // Import
 import "react-confirm-alert/src/react-confirm-alert.css"; // Import css
+import { Helmet } from "react-helmet-async";
 
 const AllUsers = () => {
   const axiosSecure = useAxiosSecure();
+
   const { data: users = [], refetch } = useQuery({
     queryKey: ["users"],
     queryFn: async () => {
@@ -216,8 +218,26 @@ const AllUsers = () => {
     });
   };
 
+  const [filteredUsers, setFilteredUsers] = useState([]);
+
+  useEffect(() => {
+    setFilteredUsers(users);
+  }, [users]);
+
+  const filterByStatus = (status) => {
+    const filtered = users.filter((user) => user.status === status);
+    setFilteredUsers(filtered);
+  };
+
+  const resetData = () => {
+    setFilteredUsers(users);
+  };
+
   return (
     <>
+      <Helmet>
+        <title>BloodBridge | Users</title>
+      </Helmet>
       <DashboardTitle title={"All Users"}></DashboardTitle>
       <Card>
         <CardContent>
@@ -231,6 +251,26 @@ const AllUsers = () => {
 
       {/* SPACER */}
       <hr className="my-4" />
+      <div className="grid grid-cols-3">
+        <button
+          className="btn bg-red-600 hover:bg-red-700 text-white btn-sm text-xs md:btn-md md:text-base"
+          onClick={() => filterByStatus("blocked")}
+        >
+          Filter Blocked
+        </button>
+        <button
+          className="btn bg-green-600 hover:bg-green-700 text-white btn-sm text-xs md:btn-md md:text-base"
+          onClick={() => filterByStatus("active")}
+        >
+          Filter Active
+        </button>
+        <button
+          className="btn bg-gray-600 hover:bg-gray-700 text-white btn-sm text-xs md:btn-md md:text-base"
+          onClick={resetData}
+        >
+          Reset Filters
+        </button>
+      </div>
 
       {/* TABULAR ELEMENT FOR USERS */}
       <Paper sx={{ width: "100%", overflow: "hidden" }}>
@@ -252,7 +292,7 @@ const AllUsers = () => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {users
+              {filteredUsers
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((user) => {
                   return (
@@ -348,7 +388,7 @@ const AllUsers = () => {
         <TablePagination
           rowsPerPageOptions={[10, 25, 100]}
           component="div"
-          count={users.length}
+          count={filteredUsers.length}
           rowsPerPage={rowsPerPage}
           page={page}
           onPageChange={handleChangePage}
