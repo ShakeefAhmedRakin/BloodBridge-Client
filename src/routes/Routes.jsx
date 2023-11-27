@@ -4,7 +4,7 @@ import Home from "../pages/public/Home/Home";
 import Login from "../pages/Login/Login";
 import Register from "../pages/Register/Register";
 import Dashboard from "../pages/Dashboard/Dashboard";
-import DashboardHome from "../pages/Dashboard/DashboardHome";
+import DashboardHome from "../pages/Dashboard/Shared/DashboardHome";
 import AllUsers from "../pages/Dashboard/Admin/AllUsers/AllUsers";
 import PrivateRoute from "../routes/PrivateRoute";
 import AdminRoute from "./AdminRoute";
