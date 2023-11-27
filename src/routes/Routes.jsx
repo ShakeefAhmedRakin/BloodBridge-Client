@@ -9,6 +9,7 @@ import AllUsers from "../pages/Dashboard/Admin/AllUsers/AllUsers";
 import PrivateRoute from "../routes/PrivateRoute";
 import AdminRoute from "./AdminRoute";
 import Profile from "../pages/Dashboard/Shared/Profile";
+import CreateDonationRequest from "../pages/Dashboard/Shared/CreateDonationRequest";
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -46,11 +47,23 @@ export const router = createBrowserRouter([
           </PrivateRoute>
         ),
       },
-      // ADMIN ROUTES
       {
         path: "/dashboard",
-        element: <DashboardHome></DashboardHome>,
+        element: (
+          <PrivateRoute>
+            <DashboardHome></DashboardHome>
+          </PrivateRoute>
+        ),
       },
+      {
+        path: "/dashboard/create-donation-request",
+        element: (
+          <PrivateRoute>
+            <CreateDonationRequest></CreateDonationRequest>
+          </PrivateRoute>
+        ),
+      },
+      // ADMIN ROUTES
       {
         path: "/dashboard/all-users",
         element: (

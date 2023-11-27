@@ -86,6 +86,15 @@ const Dashboard = () => {
               >
                 <li>Your Profile</li>
               </NavLink>
+              <NavLink
+                to={"/dashboard/create-donation-request"}
+                onClick={closeSidebar}
+                className={"p-2 w-full border-2 hover:underline rounded-xl"}
+              >
+                <li>Create Donation Request</li>
+              </NavLink>
+              <hr />
+              <hr />
               {/* ADMIN ROUTES */}
               {role === "admin" ? (
                 <>
