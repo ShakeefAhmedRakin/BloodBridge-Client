@@ -7,7 +7,7 @@ const Blogs = () => {
   const axiosPublic = useAxiosPublic();
   const [loading, setLoading] = useState(true);
   const [blogs, setBlogs] = useState([]);
-  const [blog, blogURL] = useState(window.location.href);
+  const [blogURL, SetBlogURL] = useState(window.location.href);
 
   useEffect(() => {
     axiosPublic.get("/blogs/published").then((res) => {
@@ -22,7 +22,7 @@ const Blogs = () => {
 
   return (
     <>
-      <div className="custom-min-height">
+      <div className="custom-min-height" data-aos="fade-up">
         <Helmet>
           <title>BloodBridge | Blogs</title>
         </Helmet>
@@ -41,12 +41,11 @@ const Blogs = () => {
           <>
             {blogs.length > 0 ? (
               <>
-                <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-5">
+                <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-5 mb-10">
                   {blogs.map((blog) => (
                     <div
                       key={blog._id}
                       className="bg-background rounded-xl shadow-xl font-heading p-2 border-2"
-                      data-aos="fade-up"
                     >
                       <div className="w-full h-[200px]">
                         <img
@@ -64,7 +63,7 @@ const Blogs = () => {
                       </div>
                       <div className="flex justify-center my-4">
                         <FacebookShareButton
-                          url={blog}
+                          url={blogURL}
                           title={blog.title}
                           quote={blog.content}
                           className="btn"

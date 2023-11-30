@@ -41,7 +41,7 @@ const Search = () => {
 
   return (
     <>
-      <div className="custom-min-height">
+      <div className="custom-min-height" data-aos="fade-up">
         <Helmet>
           <title>BloodBridge | Search Donor</title>
         </Helmet>
@@ -54,7 +54,6 @@ const Search = () => {
         <form
           className="bg-background rounded-xl px-5 py-8 max-w-xl mx-auto"
           onSubmit={handleSubmit(onSubmit)}
-          data-aos="fade-up"
         >
           <div className="grid grid-cols-3 gap-x-2 md:gap-x-2 mb-6">
             <div>

@@ -8,7 +8,7 @@ const BloodDonationRequests = () => {
   const [donationRequests, isLoading] = useDonationRequests();
 
   return (
-    <div className="custom-min-height">
+    <div className="custom-min-height" data-aos="fade-up">
       <Helmet>
         <title>BloodBridge | Requests</title>
       </Helmet>
@@ -27,10 +27,7 @@ const BloodDonationRequests = () => {
         </>
       ) : (
         <>
-          <div
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 "
-            data-aos="fade-up"
-          >
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 ">
             {donationRequests
               .filter((donation) => donation.request_status === "pending")
               .map((req) => (
