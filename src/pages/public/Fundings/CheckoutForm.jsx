@@ -58,7 +58,6 @@ const CheckoutForm = ({ refetch }) => {
     if (confirmError) {
       toast.error(confirmError.message);
     } else {
-      console.log(paymentIntent);
       if (paymentIntent.status === "succeeded") {
         setTransId(paymentIntent.id);
 

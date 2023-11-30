@@ -44,7 +44,6 @@ const Profile = () => {
           })
           .then((response) => {
             if (response.data.modifiedCount > 0) {
-              console.log("REACHED");
               handleClose();
               refetch();
               toast.success("Profile Updated");

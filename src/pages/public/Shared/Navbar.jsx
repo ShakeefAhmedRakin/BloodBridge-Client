@@ -14,11 +14,9 @@ const Navbar = () => {
   }, [user]);
 
   const handleLogOut = () => {
-    logOut()
-      .then(() => {
-        toast.success("Successfully logged out");
-      })
-      .catch((error) => console.log(error));
+    logOut().then(() => {
+      toast.success("Successfully logged out");
+    });
   };
 
   let location = useLocation();

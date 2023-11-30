@@ -9,12 +9,17 @@ const AdminVolDashboard = () => {
   const [loading, setLoading] = useState(true);
   const [donationRequests, isLoading] = useDonationRequests();
   const [userCount, setUserCount] = useState(0);
+  const [funding, setFunding] = useState(0);
   const axiosSecure = useAxiosSecure();
 
   useEffect(() => {
     axiosSecure.get("/stats/user/count").then((res) => {
       setLoading(false);
       setUserCount(res.data.count);
+    });
+
+    axiosSecure.get("/fundings/total").then((res) => {
+      setFunding(res.data.totalAmount);
     });
   }, [axiosSecure]);
 
@@ -46,8 +51,8 @@ const AdminVolDashboard = () => {
             <div className="bg-[#00A157] py-10 flex justify-around items-center rounded-lg shadow-xl">
               <RiRefund2Line className="text-6xl"></RiRefund2Line>
               <div className="text-right">
-                <p className="text-3xl font-bold">{donationRequests.length}</p>
-                <p>Funding</p>
+                <p className="text-3xl font-bold">$ {funding}</p>
+                <p>Total Funds</p>
               </div>
             </div>
           </div>

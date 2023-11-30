@@ -17,7 +17,6 @@ const UpdateDonationRequest = () => {
   const { register, handleSubmit, reset } = useForm();
   const navigate = useNavigate();
   const [userInfo] = useUserInfo();
-  console.log(userInfo);
 
   const onSubmit = (data) => {
     if (data.recipient_district === "default") {

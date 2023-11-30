@@ -1,4 +1,5 @@
 import { BiDonateBlood } from "react-icons/bi";
+import { NavLink } from "react-router-dom";
 
 const Footer = () => {
   return (
@@ -19,16 +20,31 @@ const Footer = () => {
               </p>
             </aside>
             <nav className="text-white">
-              <header className="footer-title">Services</header>
-              <a className="link link-hover">Branding</a>
+              <header className="footer-title">Links</header>
+              <NavLink to={"/"} className={`link link:hover`}>
+                Home
+              </NavLink>
+              <NavLink
+                to={"/blood-donation-requests"}
+                className={`link link:hover`}
+              >
+                Donations
+              </NavLink>
+              <NavLink to={"/blogs"} className={`link link:hover`}>
+                Blogs
+              </NavLink>
+              <NavLink to={"/search"} className={`link link:hover`}>
+                Search Donors
+              </NavLink>
             </nav>
             <nav className="text-white">
-              <header className="footer-title">Company</header>
-              <a className="link link-hover">About us</a>
-            </nav>
-            <nav className="text-white">
-              <header className="footer-title">Legal</header>
-              <a className="link link-hover">Terms of use</a>
+              <header className="footer-title">Others</header>
+              <NavLink to={"/login"} className={`link link:hover`}>
+                Login
+              </NavLink>
+              <NavLink to={"/register"} className={`link link:hover`}>
+                Sign Up
+              </NavLink>
             </nav>
           </footer>
         </div>

@@ -34,10 +34,7 @@ const Banner = () => {
 
         {/* IMAGE */}
         <div className="flex-1">
-          <img
-            src="/src/assets/banner/healthy-man-donating-his-blood.png"
-            alt=""
-          />
+          <img src="healthy-man-donating-his-blood.png" alt="" />
         </div>
       </div>
     </>

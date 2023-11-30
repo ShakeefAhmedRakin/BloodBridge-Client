@@ -64,7 +64,6 @@ const DonorDashboard = () => {
   };
 
   const handleDelete = (id) => {
-    console.log(id);
     Swal.fire({
       title: "Are you sure?",
       text: "Delete this donation request?",
@@ -86,8 +85,6 @@ const DonorDashboard = () => {
       }
     });
   };
-
-  console.log(requests);
 
   return (
     <>
@@ -237,6 +234,12 @@ const DonorDashboard = () => {
                 </TableBody>
               </Table>
             </TableContainer>
+            <button
+              className="bg-primary text-white btn hover:bg-primary my-5 border-none"
+              onClick={() => navigate("/dashboard/my-donation-requests")}
+            >
+              View all requests
+            </button>
           </Paper>
         </>
       ) : (

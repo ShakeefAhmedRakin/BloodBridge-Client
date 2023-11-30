@@ -58,7 +58,6 @@ const MyDonationRequests = () => {
 
   const handleItemsPerPage = (e) => {
     const val = parseInt(e.target.value);
-    console.log(val);
     setItemsPerPage(val);
     setCurrentPage(0);
   };
@@ -111,7 +110,6 @@ const MyDonationRequests = () => {
   };
 
   const handleDelete = (id) => {
-    console.log(id);
     Swal.fire({
       title: "Are you sure?",
       text: "Delete this donation request?",

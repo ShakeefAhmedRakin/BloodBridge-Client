@@ -4,7 +4,7 @@ import { MdEmail } from "react-icons/md";
 import { RiLockPasswordFill } from "react-icons/ri";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 import { useContext, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FaHouse } from "react-icons/fa6";
 import { Helmet } from "react-helmet-async";
 import { AuthContext } from "../../providers/AuthProvider";
@@ -13,6 +13,7 @@ import { toast } from "sonner";
 const Login = () => {
   const [seePassword, setSeePassword] = useState(false);
   const { signIn } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -21,10 +22,9 @@ const Login = () => {
     const password = form.password.value;
 
     signIn(email, password)
-      .then((result) => {
-        const user = result.user;
-        console.log(user);
+      .then(() => {
         toast.success("Successfully logged in. Redirecting...");
+        setTimeout(() => navigate("/"), 2000);
       })
       .catch((error) => {
         toast.error(error.message);
@@ -38,7 +38,7 @@ const Login = () => {
       </Helmet>
       <div className="flex h-screen justify-center items-center">
         <div className="flex items-center bg-secondary h-full w-full md:w-[50%] lg:w-[40%] xl:w-[20%] px-3">
-          <div className="font-heading max-w-sm w-full mx-auto">
+          <div className="font-heading max-w-sm w-full mx-auto mb-20">
             <Link to={"/"}>
               <button className="btn w-full mb-6 rounded-xl bg-accent hover:bg-accent border-none font-bold">
                 <FaHouse></FaHouse>Go To Home
@@ -114,7 +114,7 @@ const Login = () => {
           </div>
         </div>
         <div className="flex-1 hidden md:flex justify-center">
-          <img src="/src/assets/banner/healthy-man-donating-his-blood.png" />
+          <img src="healthy-man-donating-his-blood.png" />
         </div>
       </div>
     </>

@@ -24,11 +24,9 @@ const Dashboard = () => {
   };
 
   const handleLogOut = () => {
-    logOut()
-      .then(() => {
-        toast.success("Successfully logged out");
-      })
-      .catch((error) => console.log(error));
+    logOut().then(() => {
+      toast.success("Successfully logged out");
+    });
   };
 
   return (
@@ -38,7 +36,7 @@ const Dashboard = () => {
         <div className="drawer-content overflow-x-auto">
           <label
             htmlFor="my-drawer-2"
-            className="btn btn-md text-lg bg-secondary border-none text-white hover:bg-secondary drawer-button md:hidden mb-3 fixed left-2 top-2 rounded-xl"
+            className="btn btn-md text-lg bg-secondary border-none text-white hover:bg-secondary drawer-button md:hidden mb-3 fixed left-2 top-2 rounded-xl z-50"
           >
             <span className="text-xs">Menu</span>
             <TbLayoutSidebarLeftExpandFilled />
