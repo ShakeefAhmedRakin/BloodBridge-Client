@@ -20,6 +20,7 @@ import ContentManagement from "../pages//Dashboard/Shared/ContentManagement";
 import AddBlog from "../pages/Dashboard/Shared/AddBlog";
 import Blogs from "../pages/public/Blogs/Blogs";
 import Search from "../pages/public/Search/Search";
+import Fundings from "../pages/public/Fundings/Fundings";
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -50,6 +51,14 @@ export const router = createBrowserRouter([
       {
         path: "/search",
         element: <Search></Search>,
+      },
+      {
+        path: "/fundings",
+        element: (
+          <PrivateRoute>
+            <Fundings></Fundings>
+          </PrivateRoute>
+        ),
       },
       // BLOG,ALL DONATIONS,
     ],
