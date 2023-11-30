@@ -9,6 +9,7 @@ const Featured = () => {
           />
         </div>
         <div>
+          <h1 className="font-bold underline">Featured</h1>
           <h1 className=" text-primary font-bold tracking-tighter text-3xl">
             WHY A BLOOD SHORTAGE?
           </h1>
