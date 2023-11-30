@@ -2,8 +2,8 @@ import { Avatar, Paper, Typography } from "@mui/material";
 import DashboardTitle from "../../../components/DashboardTitle";
 import useUserInfo from "../../../hooks/useUserInfo";
 import { Helmet } from "react-helmet-async";
-import DonorDashboard from "./DonorDashboard";
-
+import DonorDashboard from "../DashboardRoleHome/DonorDashboard";
+import AdminVolDashboard from "../DashboardRoleHome/AdminVolDashboard";
 const DashboardHome = () => {
   const [userInfo] = useUserInfo();
   return (
@@ -52,13 +52,6 @@ const DashboardHome = () => {
         </Typography>
         <hr />
 
-        {userInfo.role === "admin" ? (
-          <>
-            <h1>ADMIN STATS</h1>
-          </>
-        ) : (
-          ""
-        )}
         {userInfo.role === "donor" ? (
           <>
             <DonorDashboard></DonorDashboard>
@@ -66,9 +59,9 @@ const DashboardHome = () => {
         ) : (
           ""
         )}
-        {userInfo.role === "volunteer" ? (
+        {userInfo.role === "volunteer" || userInfo.role === "admin" ? (
           <>
-            <h1>VOLUNTEER STATS</h1>
+            <AdminVolDashboard></AdminVolDashboard>
           </>
         ) : (
           ""

@@ -31,7 +31,9 @@ const Blogs = () => {
         <hr className="my-3" />
         {loading ? (
           <>
-            <h1>Loading</h1>
+            <div className="flex justify-center items-center py-20 w-full">
+              <span className="loading loading-spinner loading-lg"></span>
+            </div>
           </>
         ) : (
           <>
