@@ -96,6 +96,25 @@ const Dashboard = () => {
                 <li>My Profile</li>
               </NavLink>
               <hr />
+              {/* VOLUNTEER ROUTES */}
+              {role === "volunteer" ? (
+                <>
+                  <NavLink
+                    to={"/dashboard/all-blood-donations"}
+                    onClick={closeSidebar}
+                    className={`p-2 w-full border-2 hover:underline rounded-xl ${
+                      location.pathname === "/dashboard/all-blood-donations"
+                        ? "text-primary"
+                        : ""
+                    }`}
+                  >
+                    <li>All Blood Donations</li>
+                  </NavLink>
+                </>
+              ) : (
+                <></>
+              )}
+
               {/* ADMIN ROUTES */}
               {role === "admin" ? (
                 <>
@@ -119,7 +138,7 @@ const Dashboard = () => {
                         : ""
                     }`}
                   >
-                    <li>Blood Donations</li>
+                    <li>All Blood Donations</li>
                   </NavLink>
                   <NavLink
                     to={"/dashboard/content-manage"}

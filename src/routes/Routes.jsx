@@ -15,6 +15,7 @@ import BloodDonationDetails from "../pages/public/BloodDonationDetails/BloodDona
 import MyDonationRequests from "../pages/Dashboard/Donor/MyDonationRequests";
 import UpdateDonationRequest from "../pages/Dashboard/Shared/UpdateDonationRequest";
 import DonorRoute from "./DonorRoute";
+import AllDonations from "../pages/Dashboard/Shared/AllDonations";
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -97,9 +98,14 @@ export const router = createBrowserRouter([
           </AdminRoute>
         ),
       },
+      // ADMIN + VOLUNTEER
       {
         path: "/dashboard/all-blood-donations",
-        element: <></>,
+        element: (
+          <PrivateRoute>
+            <AllDonations></AllDonations>
+          </PrivateRoute>
+        ),
       },
       {
         path: "/dashboard/content-manage",
