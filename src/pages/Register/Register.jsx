@@ -108,6 +108,7 @@ const Register = () => {
             <form
               className="bg-background rounded-xl px-5 py-8"
               onSubmit={handleSubmit(onSubmit)}
+              data-aos="fade-up"
             >
               <div className="flex justify-center flex-col items-center gap-2">
                 <div className="text-secondary flex items-center gap-1">

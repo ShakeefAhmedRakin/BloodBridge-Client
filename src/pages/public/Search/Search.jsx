@@ -49,10 +49,12 @@ const Search = () => {
         <h3 className="text-2xl md:text-3xl font-heading font-semibold mb-4 text-center">
           Search Donors
         </h3>
+
         <hr className="my-3" />
         <form
           className="bg-background rounded-xl px-5 py-8 max-w-xl mx-auto"
           onSubmit={handleSubmit(onSubmit)}
+          data-aos="fade-up"
         >
           <div className="grid grid-cols-3 gap-x-2 md:gap-x-2 mb-6">
             <div>

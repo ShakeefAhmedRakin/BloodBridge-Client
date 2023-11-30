@@ -34,21 +34,30 @@ const AdminVolDashboard = () => {
       ) : (
         <>
           <div className="grid grid-cols-1 xl:grid-cols-3 gap-4 text-white font-heading p-5">
-            <div className="bg-[#D45052] py-10 flex justify-around items-center rounded-lg shadow-xl">
+            <div
+              className="bg-[#D45052] py-10 flex justify-around items-center rounded-lg shadow-xl"
+              data-aos="fade-up"
+            >
               <FaWpforms className="text-5xl"></FaWpforms>
               <div className="text-right">
                 <p className="text-3xl font-bold">{donationRequests.length}</p>
                 <p>Donation Requests</p>
               </div>
             </div>
-            <div className="bg-[#02BCE9] py-10 flex justify-around items-center rounded-lg shadow-xl">
+            <div
+              className="bg-[#02BCE9] py-10 flex justify-around items-center rounded-lg shadow-xl"
+              data-aos="fade-up"
+            >
               <FaRegUser className="text-5xl"></FaRegUser>
               <div className="text-right">
                 <p className="text-3xl font-bold">{userCount}</p>
                 <p>Total Users</p>
               </div>
             </div>
-            <div className="bg-[#00A157] py-10 flex justify-around items-center rounded-lg shadow-xl">
+            <div
+              className="bg-[#00A157] py-10 flex justify-around items-center rounded-lg shadow-xl"
+              data-aos="fade-up"
+            >
               <RiRefund2Line className="text-6xl"></RiRefund2Line>
               <div className="text-right">
                 <p className="text-3xl font-bold">$ {funding}</p>

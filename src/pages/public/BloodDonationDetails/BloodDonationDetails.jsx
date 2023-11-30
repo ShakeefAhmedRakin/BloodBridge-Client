@@ -64,7 +64,10 @@ const BloodDonationDetails = () => {
           <span className="text-primary">Blood</span> Donation Request
         </h3>
         <hr className="my-3" />
-        <div className="flex flex-col border border-gray-500 text-text font-heading h-full bg-background shadow-xl p-4 rounded-xl max-w-2xl mx-auto">
+        <div
+          className="flex flex-col border border-gray-500 text-text font-heading h-full bg-background shadow-xl p-4 rounded-xl max-w-2xl mx-auto"
+          data-aos="fade-up"
+        >
           <div className="flex justify-between">
             <h1 className="font-bold text-base md:text-xl flex items-center gap-2">
               <MdPerson className="text-primary"></MdPerson>{" "}

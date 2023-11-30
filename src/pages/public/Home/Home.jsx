@@ -9,13 +9,13 @@ const Home = () => {
       <Helmet>
         <title>BloodBridge | Home</title>
       </Helmet>
-      <div className="my-12">
+      <div className="my-12" data-aos="fade-up">
         <Banner></Banner>
       </div>
-      <div className="my-12">
+      <div className="my-12" data-aos="fade-up">
         <Featured></Featured>
       </div>
-      <div className="my-12">
+      <div className="my-12" data-aos="fade-up">
         <ContactUs></ContactUs>
       </div>
     </>

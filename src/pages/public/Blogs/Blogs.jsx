@@ -1,11 +1,13 @@
 import { Helmet } from "react-helmet-async";
 import useAxiosPublic from "../../../hooks/useAxiosPublic";
 import { useEffect, useState } from "react";
+import { FacebookShareButton } from "react-share";
 
 const Blogs = () => {
   const axiosPublic = useAxiosPublic();
   const [loading, setLoading] = useState(true);
   const [blogs, setBlogs] = useState([]);
+  const [blog, blogURL] = useState(window.location.href);
 
   useEffect(() => {
     axiosPublic.get("/blogs/published").then((res) => {
@@ -44,6 +46,7 @@ const Blogs = () => {
                     <div
                       key={blog._id}
                       className="bg-background rounded-xl shadow-xl font-heading p-2 border-2"
+                      data-aos="fade-up"
                     >
                       <div className="w-full h-[200px]">
                         <img
@@ -58,6 +61,22 @@ const Blogs = () => {
                           dangerouslySetInnerHTML={renderContent(blog.content)}
                           className="my-2"
                         />
+                      </div>
+                      <div className="flex justify-center my-4">
+                        <FacebookShareButton
+                          url={blog}
+                          title={blog.title}
+                          quote={blog.content}
+                          className="btn"
+                          style={{
+                            backgroundColor: "#0861F2",
+                            color: "white",
+                            fontWeight: 500,
+                            padding: "0px 20px",
+                          }}
+                        >
+                          Share on Facebook
+                        </FacebookShareButton>
                       </div>
                       <hr />
                     </div>
