@@ -106,7 +106,7 @@ const ContentManagement = () => {
       <Helmet>
         <title>BloodBridge | Manage Content</title>
       </Helmet>
-      <DashboardTitle title={"My Donation Requests"} />
+      <DashboardTitle title={"Manage Content"} />
       <Paper sx={{ width: "100%", overflow: "hidden", padding: 1 }}>
         <div className="flex justify-between">
           <div>

@@ -61,6 +61,17 @@ const Navbar = () => {
       </li>
       <div className="divider divider-horizontal"></div>
       <li>
+        <NavLink
+          to={"/search"}
+          className={`hover:underline duration-150 ${
+            location.pathname == "/search" ? "text-primary" : ""
+          }`}
+        >
+          Search
+        </NavLink>
+      </li>
+      <div className="divider divider-horizontal"></div>
+      <li>
         <NavLink to={"/register"} className={"hover:underline"}>
           Sign Up
         </NavLink>

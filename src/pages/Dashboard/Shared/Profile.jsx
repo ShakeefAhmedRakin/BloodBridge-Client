@@ -243,6 +243,26 @@ const Profile = () => {
                   </option>
                   <option value="Comilla">Comilla</option>
                   <option value="Feni">Feni</option>
+                  <option value="Brahmanbaria">Brahmanbaria</option>
+                  <option value="Rangamati">Rangamati</option>
+                  <option value="Noakhali">Noakhali</option>
+                  <option value="Chandpur">Chandpur</option>
+                  <option value="Lakshmipur">Lakshmipur</option>
+                  <option value="Chattogram">Chattogram</option>
+                  <option value="Coxsbazar">Coxsbazar</option>
+                  <option value="Khagrachhari">Khagrachhari</option>
+                  <option value="Bandarban">Bandarban</option>
+                  <option value="Sirajganj">Sirajganj</option>
+                  <option value="Pabna">Pabna</option>
+                  <option value="Bogura">Bogura</option>
+                  <option value="Rajshahi">Rajshahi</option>
+                  <option value="Natore">Natore</option>
+                  <option value="Joypurhat">Joypurhat</option>
+                  <option value="Chapainawabganj">Chapainawabganj</option>
+                  <option value="Naogaon">Naogaon</option>
+                  <option value="Jashore">Jashore</option>
+                  <option value="Satkhira">Satkhira</option>
+                  <option value="Meherpur">Meherpur</option>
                 </select>
               </div>
               {/* UPAZILLA */}
@@ -259,8 +279,41 @@ const Profile = () => {
                   <option disabled value={"default"}>
                     Select Upazilla
                   </option>
-                  <option value="Bijoynagar">Bijoynagar</option>
+                  <option value="Debidwar">Debidwar</option>
+                  <option value="Barura">Barura</option>
+                  <option value="Brahmanpara">Brahmanpara</option>
+                  <option value="Chandina">Chandina</option>
+                  <option value="Chauddagram">Chauddagram</option>
+                  <option value="Daudkandi">Daudkandi</option>
+                  <option value="Homna">Homna</option>
+                  <option value="Laksam">Laksam</option>
+                  <option value="Muradnagar">Muradnagar</option>
+                  <option value="Nangalkot">Nangalkot</option>
+                  <option value="Comilla Sadar">Comilla Sadar</option>
+                  <option value="Meghna">Meghna</option>
+                  <option value="Monohargonj">Monohargonj</option>
+                  <option value="Sadarsouth">Sadarsouth</option>
+                  <option value="Titas">Titas</option>
+                  <option value="Burichang">Burichang</option>
+                  <option value="Lalmai">Lalmai</option>
+                  <option value="Chhagalnaiya">Chhagalnaiya</option>
+                  <option value="Feni Sadar">Feni Sadar</option>
+                  <option value="Sonagazi">Sonagazi</option>
+                  <option value="Fulgazi">Fulgazi</option>
+                  <option value="Parshuram">Parshuram</option>
+                  <option value="Daganbhuiyan">Daganbhuiyan</option>
+                  <option value="Brahmanbaria Sadar">Brahmanbaria Sadar</option>
+                  <option value="Kasba">Kasba</option>
+                  <option value="Nasirnagar">Nasirnagar</option>
+                  <option value="Sarail">Sarail</option>
+                  <option value="Ashuganj">Ashuganj</option>
+                  <option value="Akhaura">Akhaura</option>
                   <option value="Nabinagar">Nabinagar</option>
+                  <option value="Bancharampur">Bancharampur</option>
+                  <option value="Bijoynagar">Bijoynagar</option>
+                  <option value="Rangamati Sadar">Rangamati Sadar</option>
+                  <option value="Kaptai">Kaptai</option>
+                  <option value="Kawkhali">Kawkhali</option>
                 </select>
               </div>
             </div>

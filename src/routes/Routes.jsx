@@ -19,6 +19,7 @@ import AllDonations from "../pages/Dashboard/Shared/AllDonations";
 import ContentManagement from "../pages//Dashboard/Shared/ContentManagement";
 import AddBlog from "../pages/Dashboard/Shared/AddBlog";
 import Blogs from "../pages/public/Blogs/Blogs";
+import Search from "../pages/public/Search/Search";
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -45,6 +46,10 @@ export const router = createBrowserRouter([
       {
         path: "/blogs",
         element: <Blogs></Blogs>,
+      },
+      {
+        path: "/search",
+        element: <Search></Search>,
       },
       // BLOG,ALL DONATIONS,
     ],

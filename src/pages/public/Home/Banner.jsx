@@ -18,7 +18,7 @@ const Banner = () => {
             toward a healthier, brighter future.
           </p>
           <div className="flex flex-col md:flex-row gap-x-4 gap-y-2">
-            <Link to={"/search-donor"}>
+            <Link to={"/search"}>
               <button className="btn w-full bg-accent hover:bg-accent hover:shadow-xl">
                 Search Donors <GrSearch className="text-lg"></GrSearch>
               </button>
