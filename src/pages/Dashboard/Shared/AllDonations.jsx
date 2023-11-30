@@ -117,7 +117,7 @@ const AllDonations = () => {
       toast.error("You do not have permission to delete");
       return;
     }
-    console.log(id);
+
     Swal.fire({
       title: "Are you sure?",
       text: "Delete this donation request?",

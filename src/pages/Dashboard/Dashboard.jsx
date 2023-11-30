@@ -110,6 +110,17 @@ const Dashboard = () => {
                   >
                     <li>All Blood Donations</li>
                   </NavLink>
+                  <NavLink
+                    to={"/dashboard/content-management"}
+                    onClick={closeSidebar}
+                    className={`p-2 w-full border-2 hover:underline rounded-xl ${
+                      location.pathname === "/dashboard/content-manage"
+                        ? "text-primary"
+                        : ""
+                    }`}
+                  >
+                    <li>Manage Content</li>
+                  </NavLink>
                 </>
               ) : (
                 <></>
@@ -141,7 +152,7 @@ const Dashboard = () => {
                     <li>All Blood Donations</li>
                   </NavLink>
                   <NavLink
-                    to={"/dashboard/content-manage"}
+                    to={"/dashboard/content-management"}
                     onClick={closeSidebar}
                     className={`p-2 w-full border-2 hover:underline rounded-xl ${
                       location.pathname === "/dashboard/content-manage"

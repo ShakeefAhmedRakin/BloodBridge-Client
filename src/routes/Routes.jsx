@@ -16,6 +16,9 @@ import MyDonationRequests from "../pages/Dashboard/Donor/MyDonationRequests";
 import UpdateDonationRequest from "../pages/Dashboard/Shared/UpdateDonationRequest";
 import DonorRoute from "./DonorRoute";
 import AllDonations from "../pages/Dashboard/Shared/AllDonations";
+import ContentManagement from "../pages//Dashboard/Shared/ContentManagement";
+import AddBlog from "../pages/Dashboard/Shared/AddBlog";
+import Blogs from "../pages/public/Blogs/Blogs";
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -41,7 +44,7 @@ export const router = createBrowserRouter([
       },
       {
         path: "/blogs",
-        element: <></>,
+        element: <Blogs></Blogs>,
       },
       // BLOG,ALL DONATIONS,
     ],
@@ -108,8 +111,20 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: "/dashboard/content-manage",
-        element: <></>,
+        path: "/dashboard/content-management",
+        element: (
+          <PrivateRoute>
+            <ContentManagement></ContentManagement>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/dashboard/content-management/add-blog",
+        element: (
+          <PrivateRoute>
+            <AddBlog></AddBlog>
+          </PrivateRoute>
+        ),
       },
       // DONOR ROUTES
       {
