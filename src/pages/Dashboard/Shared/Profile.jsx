@@ -2,7 +2,6 @@ import { Helmet } from "react-helmet-async";
 import DashboardTitle from "../../../components/DashboardTitle";
 import { Box, Modal, Paper } from "@mui/material";
 import Avatar from "@mui/material/Avatar";
-import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import useUserInfo from "../../../hooks/useUserInfo";
@@ -74,67 +73,59 @@ const Profile = () => {
         <title>BloodBridge | Profile</title>
       </Helmet>
       <DashboardTitle title={"Profile"}></DashboardTitle>
-      <Paper>
-        <Card variant="outlined">
-          <CardContent>
-            <div className="flex items-center mb-5 gap-3">
-              <div className="relative">
-                <Avatar
-                  alt="Remy Sharp"
-                  src={userInfo.image}
-                  sx={{ width: 100, height: 100 }}
-                />
-                <span
-                  className={`absolute bottom-0 badge font-heading border-0 font-bold uppercase text-white ${
-                    userInfo.role === "admin" ? "bg-secondary" : ""
-                  }${userInfo.role === "donor" ? "bg-purple-600" : ""}${
-                    userInfo.role === "volunteer" ? "bg-green-600" : ""
-                  }`}
-                  style={{
-                    position: "absolute",
-                    transform: "translate(-50%, 50%)",
-                    left: "50%",
-                  }}
-                >
-                  {userInfo.role}
-                </span>
-              </div>
-              <div>
-                <Typography variant="h5" component="div">
-                  <span className="font-heading font-bold">
-                    {userInfo.name}
-                  </span>
-                </Typography>
-                <Typography color="textSecondary">
-                  <span className="font-heading font-bold">
-                    {userInfo.email}
-                  </span>
-                </Typography>
-              </div>
-            </div>
-            <hr />
-            <div className="flex gap-2 mt-1 mb-1">
-              <span className="font-heading font-bold">Blood Group:</span>
-
-              <span className="font-heading text-lg">
-                {userInfo.blood_group}
+      <Paper sx={{ padding: 1 }}>
+        <CardContent>
+          <div className="flex items-center mb-5 gap-3">
+            <div className="relative">
+              <Avatar
+                alt="Remy Sharp"
+                src={userInfo.image}
+                sx={{ width: 100, height: 100 }}
+              />
+              <span
+                className={`absolute bottom-0 badge font-heading border-0 font-bold uppercase text-white ${
+                  userInfo.role === "admin" ? "bg-secondary" : ""
+                }${userInfo.role === "donor" ? "bg-purple-600" : ""}${
+                  userInfo.role === "volunteer" ? "bg-green-600" : ""
+                }`}
+                style={{
+                  position: "absolute",
+                  transform: "translate(-50%, 50%)",
+                  left: "50%",
+                }}
+              >
+                {userInfo.role}
               </span>
             </div>
-            <div className="flex gap-2 mb-1">
-              <span className="font-heading font-bold">Address:</span>
-
-              <span className="font-heading text-">
-                {userInfo.district}, {userInfo.upazilla}
-              </span>
+            <div>
+              <Typography variant="h5" component="div">
+                <span className="font-heading font-bold">{userInfo.name}</span>
+              </Typography>
+              <Typography color="textSecondary">
+                <span className="font-heading font-bold">{userInfo.email}</span>
+              </Typography>
             </div>
-            <button
-              onClick={handleOpen}
-              className="btn btn-sm mt-2 bg-secondary text-white"
-            >
-              Change Info
-            </button>
-          </CardContent>
-        </Card>
+          </div>
+          <hr />
+          <div className="flex gap-2 mt-1 mb-1">
+            <span className="font-heading font-bold">Blood Group:</span>
+
+            <span className="font-heading text-lg">{userInfo.blood_group}</span>
+          </div>
+          <div className="flex gap-2 mb-1">
+            <span className="font-heading font-bold">Address:</span>
+
+            <span className="font-heading text-">
+              {userInfo.district}, {userInfo.upazilla}
+            </span>
+          </div>
+          <button
+            onClick={handleOpen}
+            className="btn btn-sm mt-2 bg-secondary text-white"
+          >
+            Change Info
+          </button>
+        </CardContent>
       </Paper>
 
       {/* MODAL */}

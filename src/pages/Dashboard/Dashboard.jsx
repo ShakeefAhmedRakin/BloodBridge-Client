@@ -1,5 +1,5 @@
 import { BiDonateBlood } from "react-icons/bi";
-import { Link, NavLink, Outlet } from "react-router-dom";
+import { Link, NavLink, Outlet, useLocation } from "react-router-dom";
 import { TbLayoutSidebarLeftCollapseFilled } from "react-icons/tb";
 import { TbLayoutSidebarLeftExpandFilled } from "react-icons/tb";
 import { useContext } from "react";
@@ -14,6 +14,7 @@ const Dashboard = () => {
   const { logOut } = useContext(AuthContext);
   const [userInfo] = useUserInfo();
   const role = userInfo.role;
+  let location = useLocation();
 
   const closeSidebar = () => {
     const closeBtn = document.getElementById("my-drawer-2");
@@ -75,25 +76,25 @@ const Dashboard = () => {
               <NavLink
                 to={"/dashboard/"}
                 onClick={closeSidebar}
-                className={"p-2 w-full border-2 hover:underline rounded-xl"}
+                className={`p-2 w-full border-2 hover:underline rounded-xl ${
+                  location.pathname === "/dashboard" ? "text-primary" : ""
+                } ${
+                  location.pathname === "/dashboard/" ? "text-primary" : ""
+                } `}
               >
                 <li>Dashboard</li>
               </NavLink>
               <NavLink
                 to={"/dashboard/profile"}
                 onClick={closeSidebar}
-                className={"p-2 w-full border-2 hover:underline rounded-xl"}
+                className={`p-2 w-full border-2 hover:underline rounded-xl ${
+                  location.pathname === "/dashboard/profile"
+                    ? "text-primary"
+                    : ""
+                }`}
               >
-                <li>Your Profile</li>
+                <li>My Profile</li>
               </NavLink>
-              <NavLink
-                to={"/dashboard/create-donation-request"}
-                onClick={closeSidebar}
-                className={"p-2 w-full border-2 hover:underline rounded-xl"}
-              >
-                <li>Create Donation Request</li>
-              </NavLink>
-              <hr />
               <hr />
               {/* ADMIN ROUTES */}
               {role === "admin" ? (
@@ -101,21 +102,33 @@ const Dashboard = () => {
                   <NavLink
                     to={"/dashboard/all-users"}
                     onClick={closeSidebar}
-                    className={"p-2 w-full border-2 hover:underline rounded-xl"}
+                    className={`p-2 w-full border-2 hover:underline rounded-xl ${
+                      location.pathname === "/dashboard/all-users"
+                        ? "text-primary"
+                        : ""
+                    }`}
                   >
                     <li>All Users</li>
                   </NavLink>
                   <NavLink
                     to={"/dashboard/all-blood-donations"}
                     onClick={closeSidebar}
-                    className={"p-2 w-full border-2 hover:underline rounded-xl"}
+                    className={`p-2 w-full border-2 hover:underline rounded-xl ${
+                      location.pathname === "/dashboard/all-blood-donations"
+                        ? "text-primary"
+                        : ""
+                    }`}
                   >
                     <li>Blood Donations</li>
                   </NavLink>
                   <NavLink
                     to={"/dashboard/content-manage"}
                     onClick={closeSidebar}
-                    className={"p-2 w-full border-2 hover:underline rounded-xl"}
+                    className={`p-2 w-full border-2 hover:underline rounded-xl ${
+                      location.pathname === "/dashboard/content-manage"
+                        ? "text-primary"
+                        : ""
+                    }`}
                   >
                     <li>Manage Content</li>
                   </NavLink>
@@ -125,6 +138,35 @@ const Dashboard = () => {
               )}
 
               {/* DONOR ROUTES */}
+              {role === "donor" ? (
+                <>
+                  <NavLink
+                    to={"/dashboard/my-donation-requests"}
+                    onClick={closeSidebar}
+                    className={`p-2 w-full border-2 hover:underline rounded-xl ${
+                      location.pathname === "/dashboard/my-donation-requests"
+                        ? "text-primary"
+                        : ""
+                    }`}
+                  >
+                    <li>My Donation Requests</li>
+                  </NavLink>
+                  <NavLink
+                    to={"/dashboard/create-donation-request"}
+                    onClick={closeSidebar}
+                    className={`p-2 w-full border-2 hover:underline rounded-xl ${
+                      location.pathname === "/dashboard/create-donation-request"
+                        ? "text-primary"
+                        : ""
+                    }`}
+                  >
+                    <li>Create Donation Request</li>
+                  </NavLink>
+                </>
+              ) : (
+                <></>
+              )}
+
               <hr className="my-2" />
               <Link
                 to={"/"}

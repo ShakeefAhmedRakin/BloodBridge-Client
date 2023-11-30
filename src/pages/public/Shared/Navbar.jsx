@@ -1,10 +1,9 @@
 import { BiDonateBlood } from "react-icons/bi";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useLocation } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../../providers/AuthProvider";
 import { toast } from "sonner";
 import { GrLogin, GrLogout } from "react-icons/gr";
-import "./Navbar.css";
 
 const Navbar = () => {
   const { user, logOut } = useContext(AuthContext);
@@ -22,22 +21,41 @@ const Navbar = () => {
       .catch((error) => console.log(error));
   };
 
+  let location = useLocation();
+
   const links = (
     <>
       <li>
-        <NavLink to={"/"} className={"hover:underline"}>
+        <NavLink
+          to={"/"}
+          className={`hover:underline duration-150 ${
+            location.pathname == "/" ? "text-primary" : ""
+          }`}
+        >
           Home
         </NavLink>
       </li>
       <div className="divider divider-horizontal"></div>
       <li>
-        <NavLink to={"/donation-requests"} className={"hover:underline"}>
+        <NavLink
+          to={"/blood-donation-requests"}
+          className={`hover:underline duration-150 ${
+            location.pathname == "/blood-donation-requests"
+              ? "text-primary"
+              : ""
+          }`}
+        >
           Donation Requests
         </NavLink>
       </li>
       <div className="divider divider-horizontal"></div>
       <li>
-        <NavLink to={"/blog"} className={"hover:underline"}>
+        <NavLink
+          to={"/blogs"}
+          className={`hover:underline duration-150 ${
+            location.pathname == "/blogs" ? "text-primary" : ""
+          }`}
+        >
           Blog
         </NavLink>
       </li>

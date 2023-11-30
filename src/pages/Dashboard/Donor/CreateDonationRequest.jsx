@@ -29,6 +29,9 @@ const CreateDonationRequest = () => {
     data["requester_name"] = userInfo.name;
     data["requester_email"] = userInfo.email;
     data["request_status"] = "pending";
+    let currentDate = new Date();
+    let formattedDateTime = currentDate.toLocaleString();
+    data["creation_time"] = formattedDateTime;
 
     axiosSecure.post("/donation-requests", data).then((res) => {
       if (res.data.insertedId) {

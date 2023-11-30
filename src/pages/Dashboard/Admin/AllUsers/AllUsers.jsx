@@ -24,11 +24,26 @@ import { Helmet } from "react-helmet-async";
 const AllUsers = () => {
   const axiosSecure = useAxiosSecure();
 
-  const { data: users = [], refetch } = useQuery({
-    queryKey: ["users"],
+  const [filter, setFilter] = useState("all");
+
+  const {
+    data: users = [],
+    refetch,
+    isLoading,
+    isRefetching,
+  } = useQuery({
+    queryKey: ["users", filter], // Include filter as part of the query key
     queryFn: async () => {
       const res = await axiosSecure.get("/users", {});
-      return res.data;
+      if (filter === "all") {
+        return res.data;
+      }
+      if (filter === "blocked") {
+        return res.data.filter((user) => user.status === "blocked");
+      }
+      if (filter === "active") {
+        return res.data.filter((user) => user.status === "active");
+      }
     },
   });
 
@@ -43,7 +58,7 @@ const AllUsers = () => {
   ];
 
   const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(10);
+  const [rowsPerPage, setRowsPerPage] = useState(5);
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -55,7 +70,6 @@ const AllUsers = () => {
   };
 
   // ACTIONS
-
   const handleBlockUser = (user) => {
     confirmAlert({
       closeOnEscape: true,
@@ -218,20 +232,13 @@ const AllUsers = () => {
     });
   };
 
-  const [filteredUsers, setFilteredUsers] = useState([]);
+  const filterByStatus = (status) => {
+    setFilter(status); // Update the filter state
+  };
 
   useEffect(() => {
-    setFilteredUsers(users);
-  }, [users]);
-
-  const filterByStatus = (status) => {
-    const filtered = users.filter((user) => user.status === status);
-    setFilteredUsers(filtered);
-  };
-
-  const resetData = () => {
-    setFilteredUsers(users);
-  };
+    refetch();
+  }, [filter, refetch]);
 
   return (
     <>
@@ -266,7 +273,7 @@ const AllUsers = () => {
         </button>
         <button
           className="btn bg-gray-600 hover:bg-gray-700 text-white btn-sm text-xs md:btn-md md:text-base"
-          onClick={resetData}
+          onClick={() => filterByStatus("all")}
         >
           Reset Filters
         </button>
@@ -291,109 +298,122 @@ const AllUsers = () => {
                 ))}
               </TableRow>
             </TableHead>
-            <TableBody>
-              {filteredUsers
-                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                .map((user) => {
-                  return (
-                    <TableRow key={user._id}>
-                      <TableCell component="th" scope="row">
-                        <img
-                          src={user.image}
-                          className="avatar w-9 rounded-full aspect-square object-cover"
-                        />
-                      </TableCell>
-                      <TableCell>{user.email}</TableCell>
-                      <TableCell>{user.name}</TableCell>
-                      <TableCell>
-                        <span
-                          className={`font-semibold ${
-                            user.status === "active"
-                              ? "text-green-600"
-                              : "text-red-600"
-                          }`}
-                        >
-                          {user.status}
-                        </span>
-                      </TableCell>
-                      <TableCell>
-                        <span
-                          className={`font-semibold ${
-                            user.role === "donor"
-                              ? "text-purple-600"
-                              : user.role === "volunteer"
-                              ? "text-green-600"
-                              : ""
-                          }`}
-                        >
-                          {user.role}
-                        </span>
-                      </TableCell>
-                      <TableCell align="left">
-                        {user.status === "active" ? (
-                          <button
-                            className="btn bg-primary hover:bg-primary text-white"
-                            type="button"
-                            onClick={() => {
-                              handleBlockUser(user);
-                            }}
-                          >
-                            Block
-                          </button>
-                        ) : (
-                          <button
-                            className="btn bg-cyan-500 hover:bg-cyan-500 text-white"
-                            type="button"
-                            onClick={() => {
-                              handleUnblockUser(user);
-                            }}
-                          >
-                            Unblock
-                          </button>
-                        )}
-                        {user.role === "donor" ? (
-                          <button
-                            className="btn bg-green-700 hover:bg-green-700 text-white"
-                            type="button"
-                            onClick={() => handleMakeVolunteer(user)}
-                          >
-                            Make Volunteer
-                          </button>
-                        ) : (
-                          <button
-                            className="btn bg-purple-700 hover:bg-purple-700 text-white"
-                            type="button"
-                            onClick={() => handleMakeDonor(user)}
-                          >
-                            Make Donor
-                          </button>
-                        )}
-                        <button
-                          className="btn bg-secondary hover:bg-secondary text-white"
-                          type="button"
-                          disabled={user.role === "admin" ? "disabled" : ""}
-                          onClick={() => {
-                            handleMakeAdmin(user);
-                          }}
-                        >
-                          Make Admin
-                        </button>
-                      </TableCell>
-                    </TableRow>
-                  );
-                })}
-            </TableBody>
+            {isLoading || isRefetching ? (
+              <></>
+            ) : (
+              <>
+                <TableBody>
+                  {users
+                    .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                    .map((user) => {
+                      return (
+                        <TableRow key={user._id}>
+                          <TableCell component="th" scope="row">
+                            <img
+                              src={user.image}
+                              className="avatar w-9 rounded-full aspect-square object-cover"
+                            />
+                          </TableCell>
+                          <TableCell>{user.email}</TableCell>
+                          <TableCell>{user.name}</TableCell>
+                          <TableCell>
+                            <span
+                              className={`font-semibold ${
+                                user.status === "active"
+                                  ? "text-green-600"
+                                  : "text-red-600"
+                              }`}
+                            >
+                              {user.status}
+                            </span>
+                          </TableCell>
+                          <TableCell>
+                            <span
+                              className={`font-semibold ${
+                                user.role === "donor"
+                                  ? "text-purple-600"
+                                  : user.role === "volunteer"
+                                  ? "text-green-600"
+                                  : ""
+                              }`}
+                            >
+                              {user.role}
+                            </span>
+                          </TableCell>
+                          <TableCell align="left">
+                            {user.status === "active" ? (
+                              <button
+                                className="btn bg-primary hover:bg-primary text-white"
+                                type="button"
+                                onClick={() => {
+                                  handleBlockUser(user);
+                                }}
+                              >
+                                Block
+                              </button>
+                            ) : (
+                              <button
+                                className="btn bg-cyan-500 hover:bg-cyan-500 text-white"
+                                type="button"
+                                onClick={() => {
+                                  handleUnblockUser(user);
+                                }}
+                              >
+                                Unblock
+                              </button>
+                            )}
+                            {user.role === "donor" ? (
+                              <button
+                                className="btn bg-green-700 hover:bg-green-700 text-white"
+                                type="button"
+                                onClick={() => handleMakeVolunteer(user)}
+                              >
+                                Make Volunteer
+                              </button>
+                            ) : (
+                              <button
+                                className="btn bg-purple-700 hover:bg-purple-700 text-white"
+                                type="button"
+                                onClick={() => handleMakeDonor(user)}
+                              >
+                                Make Donor
+                              </button>
+                            )}
+                            <button
+                              className="btn bg-secondary hover:bg-secondary text-white"
+                              type="button"
+                              disabled={user.role === "admin" ? "disabled" : ""}
+                              onClick={() => {
+                                handleMakeAdmin(user);
+                              }}
+                            >
+                              Make Admin
+                            </button>
+                          </TableCell>
+                        </TableRow>
+                      );
+                    })}
+                </TableBody>
+              </>
+            )}
           </Table>
         </TableContainer>
         <TablePagination
-          rowsPerPageOptions={[10, 25, 100]}
+          rowsPerPageOptions={[5, 10, 25]}
           component="div"
-          count={filteredUsers.length}
+          count={users.length}
           rowsPerPage={rowsPerPage}
           page={page}
           onPageChange={handleChangePage}
           onRowsPerPageChange={handleChangeRowsPerPage}
         />
+        {isLoading || isRefetching ? (
+          <div className="flex justify-center items-center py-20 w-full">
+            <span className="loading loading-spinner loading-lg"></span>
+          </div>
+        ) : (
+          <></>
+        )}
       </Paper>
     </>
   );

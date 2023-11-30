@@ -2,6 +2,7 @@ import { Avatar, Paper, Typography } from "@mui/material";
 import DashboardTitle from "../../../components/DashboardTitle";
 import useUserInfo from "../../../hooks/useUserInfo";
 import { Helmet } from "react-helmet-async";
+import DonorDashboard from "./DonorDashboard";
 
 const DashboardHome = () => {
   const [userInfo] = useUserInfo();
@@ -60,7 +61,7 @@ const DashboardHome = () => {
         )}
         {userInfo.role === "donor" ? (
           <>
-            <h1>DONOR STATS</h1>
+            <DonorDashboard></DonorDashboard>
           </>
         ) : (
           ""
