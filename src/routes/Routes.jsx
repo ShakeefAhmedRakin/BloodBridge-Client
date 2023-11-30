@@ -42,7 +42,9 @@ export const router = createBrowserRouter([
           </PrivateRoute>
         ),
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/donation-requests/${params.id}`),
+          fetch(
+            `https://blood-bridge-server.vercel.app/donation-requests/${params.id}`
+          ),
       },
       {
         path: "/blogs",
@@ -104,7 +106,9 @@ export const router = createBrowserRouter([
           </PrivateRoute>
         ),
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/donation-requests/${params.id}`),
+          fetch(
+            `https://blood-bridge-server.vercel.app/donation-requests/${params.id}`
+          ),
       },
       // ADMIN ROUTES
       {

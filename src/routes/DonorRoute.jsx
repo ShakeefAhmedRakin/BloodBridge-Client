@@ -12,7 +12,9 @@ const DonorRoute = ({ children }) => {
   if (loading || isDonorLoading) {
     return (
       <>
-        <h1>Loading</h1>
+        <div className="flex justify-center items-center py-20 w-full custom-min-height">
+          <span className="loading loading-spinner loading-lg"></span>
+        </div>
       </>
     );
   }
