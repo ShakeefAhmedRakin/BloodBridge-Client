@@ -22,6 +22,13 @@ Admin password: Admin^1
 - **Dynamic Dashboards**: Personalized dashboards for different user roles.
 - **Admin Management**: Admins have comprehensive control over blogs, donation requests, and user management.
 
+ ## Technologies used:
+<p align="left">
+  <a href="https://skillicons.dev">
+    <img src="https://skillicons.dev/icons?i=firebase,mongodb,react,tailwind,express,nodejs&perline=8" />
+  </a>
+</p>
+
 ## Usage Examples
 
 1. **User Registration and Authentication**
